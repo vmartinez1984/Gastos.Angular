@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Periodo</mat-card-title>
+        <mat-card-subtitle>{{subtitulo}}</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="formGroup" (ngSubmit)="guardar()">
+        <mat-dialog-content>
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="nombre">
+            </mat-form-field>
+            <!-- <mat-form-field>
+                <mat-label>Fecha inicial</mat-label>
+                <input matInput placeholder="$" type="number" formControlName="fechaInicial">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Fecha inicial</mat-label>
+                <input matInput placeholder="$" type="number" formControlName="fechaInicial">
+            </mat-form-field> -->
+            <mat-form-field>
+                <mat-label>Seleccione las fechas</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Fecha inicial" formControlName="fechaInicial">
+                    <input matEndDate placeholder="Fecha final" formControlName="fechaFinal">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-card-actions>
+            <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+            <button mat-raised-button color="primary">Guardar</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

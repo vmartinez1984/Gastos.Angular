@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Subcategoria</mat-card-title>
+        <mat-card-subtitle>{{subtitulo}}</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="formGroup" (ngSubmit)="guardarSubcategoria()">
+        <mat-dialog-content>
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="nombre">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="categoriaId">
+                    <mat-option *ngFor="let categoria of categorias"
+                        [value]="categoria.id">{{categoria.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Cantidad</mat-label>
+                <input matInput placeholder="$" type="number" formControlName="cantidad">
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-card-actions>
+            <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+            <button mat-raised-button color="primary" >Guardar</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

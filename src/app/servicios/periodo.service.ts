@@ -1,0 +1,26 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/enviroments/enviroment';
+import { Periodo, PeriodoDtoIn } from '../interfaces/periodo';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PeriodoService {
+  borrar(id: number): Observable<any> {
+    return this.httpClient.get<any>(this.url + "/" + id)
+  }
+  actualizar(id: number, perido: PeriodoDtoIn): Observable<any> {
+    return this.httpClient.put<any>(this.url + "/" + id, perido)
+  }
+  agregar(perido: PeriodoDtoIn): Observable<any> {
+    return this.httpClient.post<any>(this.url, perido)
+  }
+  obtenerTodos(): Observable<Periodo[]> {
+    return this.httpClient.get<Periodo[]>(this.url)
+  }
+
+  constructor(private httpClient: HttpClient) { }
+  private url = environment.urlBase + "Periodos"
+}
