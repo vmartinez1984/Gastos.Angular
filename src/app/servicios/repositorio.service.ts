@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { CategoriaService } from './categoria.service';
 import { PeriodoService } from './periodo.service';
 import { GastoService } from './gasto.service';
+import { ApartadoService } from './apartado.service';
+import { TipoDeApartadoService } from './tipo-de-apartado.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +20,16 @@ export class RepositorioService {
 
   public gasto: GastoService
 
+  public apartado: ApartadoService
+
+  public tipoDeApartado: TipoDeApartadoService
+
   constructor(httpClient: HttpClient) { 
     this.subcategoria = new SubcategoriaService(httpClient)
     this.categoria = new CategoriaService(httpClient)
     this.periodo = new PeriodoService(httpClient)
     this.gasto = new GastoService(httpClient)
+    this.apartado = new ApartadoService(httpClient)
+    this.tipoDeApartado = new TipoDeApartadoService(httpClient)
   }
 }

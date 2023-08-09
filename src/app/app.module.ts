@@ -14,18 +14,26 @@ import { BorrarSubcategoriaComponent } from './components/Subcategorias/borrar-s
 import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms'
 
+//components
+import { FormularioDeGastoComponent } from './components/Gastos/formulario-de-gasto/formulario-de-gasto.component';
+import { ListaDeApartadosComponent } from './components/Apartados/lista-de-apartados/lista-de-apartados.component';
+import { FormularioDeApartadoComponent } from './components/Apartados/formulario-de-apartado/formulario-de-apartado.component';
+import { DetallesDeApartadoComponent } from './components/Apartados/detalles-de-apartado/detalles-de-apartado.component';
+import { BorrarApartadoComponent } from './components/Apartados/borrar-apartado/borrar-apartado.component';
+
 //Angular
-import {MatCardModule} from '@angular/material/card'
-import {MatButtonModule} from '@angular/material/button'
-import {MatTableModule} from '@angular/material/table'
-import {MatDialogModule} from '@angular/material/dialog'
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatInputModule} from '@angular/material/input'
-import {MatSelectModule} from '@angular/material/select'
-import {MatIconModule} from '@angular/material/icon'
-import {MatSnackBarModule} from '@angular/material/snack-bar'
-import {MatDatepickerModule} from '@angular/material/datepicker'
+import { MatCardModule } from '@angular/material/card'
+import { MatButtonModule } from '@angular/material/button'
+import { MatTableModule } from '@angular/material/table'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatSelectModule } from '@angular/material/select'
+import { MatIconModule } from '@angular/material/icon'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSortModule} from '@angular/material/sort'
 
 @NgModule({
   declarations: [
@@ -36,12 +44,17 @@ import { MatNativeDateModule } from '@angular/material/core';
     DetallesDelPeriodoComponent,
     FormularioDeSubcategoriaComponent,
     ListaDeSubcategoriasComponent,
-    BorrarSubcategoriaComponent
+    BorrarSubcategoriaComponent,
+    FormularioDeGastoComponent,
+    ListaDeApartadosComponent,
+    FormularioDeApartadoComponent,
+    DetallesDeApartadoComponent,
+    BorrarApartadoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
     //Angular
@@ -54,7 +67,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
-    MatDatepickerModule,MatNativeDateModule
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,8 +24,8 @@ export class SubcategoriaService {
   url = environment.urlBase + "Subcategorias"
   url2 = environment.urlBase + "Categorias/"
 
-  obtenerTodos(): Observable<Subcategoria> {
-    return this.httpClient.get<Subcategoria>(this.url)
+  obtenerTodos(): Observable<Subcategoria[]> {
+    return this.httpClient.get<Subcategoria[]>(this.url)
   }
 
   constructor(private httpClient: HttpClient) {

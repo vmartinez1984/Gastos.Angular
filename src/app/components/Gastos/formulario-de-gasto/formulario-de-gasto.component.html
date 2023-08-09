@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Gasto</mat-card-title>
+        <mat-card-subtitle>{{subtitulo}} {{gasto.subcategoria.nombre}}</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="formGroup" (ngSubmit)="guardar()">
+        <mat-dialog-content>
+            <mat-form-field>
+                <mat-label>Apartado</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let apartado of apartados" [value]="apartado.id">
+                        {{apartado.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="nombre">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-hint>Presupuesto {{gasto.presupuesto | currency}}</mat-hint>
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" formControlName="cantidad" placeholder="$">
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-card-actions>
+            <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+            <button mat-raised-button color="primary">Guardar</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

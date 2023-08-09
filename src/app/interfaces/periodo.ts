@@ -1,3 +1,5 @@
+import { GastoDto } from "./gasto"
+
 export interface Periodo {
     id:number
     guid: string
@@ -11,4 +13,15 @@ export interface PeriodoDtoIn{
     fechaInicial: Date
     fechaFinal: Date
     guid: string
+}
+
+export interface PeridoConDetalles{
+    listaDeGastos: GastoDto[]
+    listaDeEntradas: GastoDto[]
+    listaDeApartados: GastoDto[]
+    id:number
+    guid:string
+    nombre:string
+    fechaInicial:Date
+    FechaFinal:Date
 }
