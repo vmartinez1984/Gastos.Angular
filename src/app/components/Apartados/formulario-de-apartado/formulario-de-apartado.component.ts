@@ -53,9 +53,14 @@ export class FormularioDeApartadoComponent implements OnInit {
     console.log(this.apartado)
     if (this.apartado) {
       this.formGroup.patchValue({
+        cantidadFinal: this.apartado.cantidadFinal,
+        cantidadInicial: this.apartado.cantidadInicial,
+        fechaFinal: this.apartado.fechaFinal,
+        fechaInicial: this.apartado.fechaInicial,
+        interes: this.apartado.intereses,
         nombre: this.apartado.nombre,
-        // categoriaId: this.apartado.categoria.id,
-        // cantidad: this.apartado.cantidad
+        subcategoriaId: this.apartado.subcategoria.id,
+        tipoDeApartadoId: this.apartado.tipoDeApartado.id
       })
       this.subtitulo = "Actualizar"
     }
@@ -69,27 +74,27 @@ export class FormularioDeApartadoComponent implements OnInit {
       fechaFinal: this.formGroup.value.fechaFinal,
       fechaInicial: this.formGroup.value.fechaInicial,
       guid: Guid.newGuid(),
-      interes: this.formGroup.value.interes,
+      intereses: this.formGroup.value.interes,
       nombre: this.formGroup.value.nombre,
-      subcategoriaIdGuid: this.formGroup.value.subcategoriaId,
-      tipoDeApartadoId: this.formGroup.value.tipoDeApartadoId
+      subcategoriaIdGuid: this.formGroup.value.subcategoriaId + "",
+      tipoDeApartadoId: this.formGroup.value.tipoDeApartadoId + ""
     }
     console.log(apartado)
-    // if (this.apartado) {
-    //   this.repositorio.apartado.actualizar(this.apartado.id, apartado).subscribe({
-    //     next: (data) => {
-    //       this.dialogRef.close()
-    //       this.snackBar.open("Datos registrados", "Ok", { duration: 3000 })
-    //     }
-    //   })
-    // } else {
-    //   this.repositorio.apartado.agregar(apartado).subscribe({
-    //     next: (data) => {
-    //       this.dialogRef.close()
-    //       this.snackBar.open("Datos registrados", "Ok", { duration: 3000 })
-    //     }
-    //   })
-    // }
+    if (this.apartado) {
+      this.repositorio.apartado.actualizar(this.apartado.id, apartado).subscribe({
+        next: (data) => {
+          this.dialogRef.close()
+          this.snackBar.open("Datos registrados", "Ok", { duration: 3000 })
+        }
+      })
+    } else {
+      this.repositorio.apartado.agregar(apartado).subscribe({
+        next: (data) => {
+          this.dialogRef.close()
+          this.snackBar.open("Datos registrados", "Ok", { duration: 3000 })
+        }
+      })
+    }
   }
 
   obtenerSubcategorias() {

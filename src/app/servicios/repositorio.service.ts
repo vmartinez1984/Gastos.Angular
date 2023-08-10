@@ -6,6 +6,7 @@ import { PeriodoService } from './periodo.service';
 import { GastoService } from './gasto.service';
 import { ApartadoService } from './apartado.service';
 import { TipoDeApartadoService } from './tipo-de-apartado.service';
+import { DetalleDeApartadoService } from './detalle-de-apartado.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,8 @@ export class RepositorioService {
 
   public tipoDeApartado: TipoDeApartadoService
 
+  public detalleDeApartado: DetalleDeApartadoService
+
   constructor(httpClient: HttpClient) { 
     this.subcategoria = new SubcategoriaService(httpClient)
     this.categoria = new CategoriaService(httpClient)
@@ -31,5 +34,6 @@ export class RepositorioService {
     this.gasto = new GastoService(httpClient)
     this.apartado = new ApartadoService(httpClient)
     this.tipoDeApartado = new TipoDeApartadoService(httpClient)
+    this.detalleDeApartado= new DetalleDeApartadoService(httpClient)
   }
 }

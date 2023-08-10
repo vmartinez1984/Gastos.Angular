@@ -23,7 +23,7 @@ export class ListaDeApartadosComponent implements AfterViewInit {
     this.obtenerTodos()
   }
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
@@ -31,7 +31,7 @@ export class ListaDeApartadosComponent implements AfterViewInit {
   obtenerTodos() {
     this.servicio.apartado.obtenerTodos().subscribe({
       next: (data) => {
-        console.log(data)
+        //console.log(data)
         data.forEach(item => {
           item.subcategoriaNombre = item.subcategoria.nombre
           item.tipoDeApartadoNombre = item.tipoDeApartado.nombre
@@ -41,12 +41,31 @@ export class ListaDeApartadosComponent implements AfterViewInit {
     })
   }
 
-  editar(_t68: any) {
-    throw new Error('Method not implemented.');
+  editar(apartado: ApartadoDto) {
+    //console.log(apartado)
+    this.dialog.open(FormularioDeApartadoComponent, {
+      disableClose: true,
+      width: "70%",
+      data: apartado
+    }).afterClosed().subscribe({
+      next: () => {
+        this.obtenerTodos()
+      }
+    })
   }
-  borrar(_t68: any) {
-    throw new Error('Method not implemented.');
+
+  borrar(apartado: ApartadoDto) {
+    this.dialog.open(FormularioDeApartadoComponent, {
+      disableClose: true,
+      width: "70%",
+      data: apartado
+    }).afterClosed().subscribe({
+      next: () => {
+        this.obtenerTodos()
+      }
+    })
   }
+
   agregar() {
     this.dialog.open(FormularioDeApartadoComponent, {
       disableClose: true,

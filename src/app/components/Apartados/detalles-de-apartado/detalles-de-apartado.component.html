@@ -1,1 +1,37 @@
-<p>detalles-de-apartado works!</p>
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <mat-grid-list cols="2" rowHeight="40px">
+                <mat-grid-tile>
+                    <h1>Detalles</h1>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <button mat-mini-fab color="primary" (click)="agregar()">
+                        <mat-icon>plus_one</mat-icon>
+                      </button>
+                </mat-grid-tile>                
+            </mat-grid-list>
+        </mat-card-content>
+    </mat-card>
+
+    <div *ngIf="apartado!=undefined && apartado.listaDeDetalles != undefined">
+        <mat-card *ngFor="let detalle of apartado.listaDeDetalles">
+            <mat-card-content>
+                <mat-grid-list cols="3" rowHeight="40px">
+                    <mat-grid-tile>{{detalle.nota}}</mat-grid-tile>
+                    <mat-grid-tile>{{detalle.cantidad | currency}}</mat-grid-tile>
+                    <mat-grid-tile>{{detalle.fechaDeRegistro | date}}</mat-grid-tile>
+                </mat-grid-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <mat-grid-list cols="3" rowHeight="40px">
+                <mat-grid-tile>Total</mat-grid-tile>
+                <mat-grid-tile>{{total | currency}}</mat-grid-tile>
+                <mat-grid-tile></mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+    </mat-card>
+</div>

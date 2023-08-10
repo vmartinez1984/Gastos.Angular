@@ -4,7 +4,7 @@ import { TipoDeApartadoDto } from "./tipoDeApartado"
 
 export interface ApartadoDto {
     nombre: string
-    interes: number
+    intereses: number
     cantidadInicial: number
     cantidadFinal: number
     fechaInicial: Date
@@ -21,12 +21,12 @@ export interface ApartadoDto {
 
 export interface ApartadoDtoIn {
     nombre: string
-    interes: number
+    intereses: number
     cantidadInicial: number
     cantidadFinal: number
     fechaInicial: Date
     fechaFinal: Date
-    tipoDeApartadoId: number
-    subcategoriaIdGuid: number
+    tipoDeApartadoId: string
+    subcategoriaIdGuid: string
     guid: string
 }

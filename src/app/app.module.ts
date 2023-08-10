@@ -20,6 +20,7 @@ import { ListaDeApartadosComponent } from './components/Apartados/lista-de-apart
 import { FormularioDeApartadoComponent } from './components/Apartados/formulario-de-apartado/formulario-de-apartado.component';
 import { DetallesDeApartadoComponent } from './components/Apartados/detalles-de-apartado/detalles-de-apartado.component';
 import { BorrarApartadoComponent } from './components/Apartados/borrar-apartado/borrar-apartado.component';
+import { FormularioDeDetalleDeApartadoComponent } from './components/DetalleDeApartados/formulario-de-detalle-de-apartado/formulario-de-detalle-de-apartado.component';
 
 //Angular
 import { MatCardModule } from '@angular/material/card'
@@ -33,7 +34,9 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSortModule} from '@angular/material/sort'
+import { MatSortModule } from '@angular/material/sort'
+import { MatGridListModule } from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { MatSortModule} from '@angular/material/sort'
     ListaDeApartadosComponent,
     FormularioDeApartadoComponent,
     DetallesDeApartadoComponent,
-    BorrarApartadoComponent
+    BorrarApartadoComponent,
+    FormularioDeDetalleDeApartadoComponent
   ],
   imports: [
     BrowserModule,
@@ -67,9 +71,10 @@ import { MatSortModule} from '@angular/material/sort'
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
-    MatDatepickerModule, 
+    MatDatepickerModule,
     MatNativeDateModule,
-    MatSortModule
+    MatSortModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

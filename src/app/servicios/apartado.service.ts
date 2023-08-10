@@ -8,6 +8,9 @@ import { ApartadoDto, ApartadoDtoIn } from '../interfaces/apartado';
   providedIn: 'root'
 })
 export class ApartadoService {
+  obtener(id: number): Observable<ApartadoDto> {
+    return this.httpCliente.get<ApartadoDto>(this.url + id)
+  }
   actualizar(id: number, apartado: ApartadoDtoIn): Observable<any> {
     return this.httpCliente.put<any>(this.url + id, apartado)
   }
