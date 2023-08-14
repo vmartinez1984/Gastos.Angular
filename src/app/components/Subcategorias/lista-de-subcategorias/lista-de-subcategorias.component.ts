@@ -5,6 +5,7 @@ import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { RepositorioService } from 'src/app/servicios/repositorio.service';
 import { FormularioDeSubcategoriaComponent } from '../formulario-de-subcategoria/formulario-de-subcategoria.component';
 import { BorrarSubcategoriaComponent } from '../borrar-subcategoria/borrar-subcategoria.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lista-de-subcategorias',
@@ -16,30 +17,42 @@ export class ListaDeSubcategoriasComponent {
   dataSource = new MatTableDataSource<Subcategoria>()
   apartados = new MatTableDataSource<Subcategoria>()
   gastos = new MatTableDataSource<Subcategoria>()
+  estaCargando = false
 
   constructor(
     private service : RepositorioService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ){
     this.obtenerTodos();
   }
 
   obtenerTodos(){
+    this.estaCargando = true
     this.service.subcategoria.obtenerPorCategoriaId(1).subscribe({
       next:(data)=>{
         this.dataSource.data =data
+        this.estaCargando = false
+      },error:(error)=>{
+        this.snackbar.open("Valio pepino", ":(")
       }
     })
 
     this.service.subcategoria.obtenerPorCategoriaId(3).subscribe({
       next:(data)=>{
         this.apartados.data =data
+        this.estaCargando = false
+      },error:(error)=>{
+        this.snackbar.open("Valio pepino", ":(")
       }
     })
 
     this.service.subcategoria.obtenerPorCategoriaId(2).subscribe({
       next:(data)=>{
         this.gastos.data =data
+        this.estaCargando = false
+      },error:(error)=>{
+        this.snackbar.open("Valio pepino", ":(")
       }
     })
   }

@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" *ngIf="estaCargando"></mat-progress-bar>
 <mat-card>
     <mat-card-header>
         <mat-card-title>Gasto</mat-card-title>
@@ -5,9 +6,9 @@
     </mat-card-header>
     <form [formGroup]="formGroup" (ngSubmit)="guardar()">
         <mat-dialog-content>
-            <mat-form-field>
+            <mat-form-field *ngIf="apartados.length > 0">
                 <mat-label>Apartado</mat-label>
-                <mat-select>
+                <mat-select formControlName="apartadoId">
                     <mat-option *ngFor="let apartado of apartados" [value]="apartado.id">
                         {{apartado.nombre}}
                     </mat-option>
@@ -26,7 +27,14 @@
         </mat-dialog-content>
         <mat-card-actions>
             <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-            <button mat-raised-button color="primary">Guardar</button>
+            <div *ngIf="estaCargando">
+                <button mat-raised-button color="primary">                    
+                    Espere un momento
+                </button>
+            </div>
+            <div *ngIf="!estaCargando">
+                <button mat-raised-button color="primary">Guardar</button>
+            </div>
         </mat-card-actions>
     </form>
 </mat-card>

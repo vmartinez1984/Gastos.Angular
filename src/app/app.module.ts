@@ -33,10 +33,12 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatIconModule } from '@angular/material/icon'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core'
 import { MatSortModule } from '@angular/material/sort'
-import { MatGridListModule } from '@angular/material/grid-list';
-
+import { MatGridListModule } from '@angular/material/grid-list'
+import {MatProgressBarModule} from '@angular/material/progress-bar'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {MatChipsModule} from '@angular/material/chips'
 
 @NgModule({
   declarations: [
@@ -74,7 +76,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSortModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

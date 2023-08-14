@@ -1,9 +1,11 @@
 table {
-  width: 90%;
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 mat-card {
-  margin: 3% 10%;
+  margin: 3%;
 }
 
 .mat-mdc-form-field {

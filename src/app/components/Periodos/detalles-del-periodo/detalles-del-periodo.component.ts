@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GastoDto, GastoDtoIn } from 'src/app/interfaces/gasto';
+import { ActivatedRoute } from '@angular/router';
+import { GastoDto } from 'src/app/interfaces/gasto';
 import { RepositorioService } from 'src/app/servicios/repositorio.service';
 import { FormularioDeGastoComponent } from '../../Gastos/formulario-de-gasto/formulario-de-gasto.component';
-import { Guid } from 'src/app/helpers/Guid';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-detalles-del-periodo',
@@ -14,24 +14,35 @@ import { Guid } from 'src/app/helpers/Guid';
 })
 export class DetallesDelPeriodoComponent {
 
-  displayedColumns: string[] = ['subcategoriaNombre', 'nombre', 'cantidad'];
-  dataSource = new MatTableDataSource<GastoDto>();
+  displayedColumns: string[] = ['subcategoriaNombre', 'nombre', 'cantidad']
+  dataSource = new MatTableDataSource<GastoDto>()
+  estaCargando = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private servicio: RepositorioService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.obtenerDetallesDelPeriodo()
   }
   
   obtenerDetallesDelPeriodo() {
+    this.estaCargando = true
     var id = Number(this.activatedRoute.snapshot.paramMap.get('id'))
     this.servicio.gasto.ObtenerTodosPorPeriodo(id).subscribe({
       next: (data) => {
         //console.log(data)
         this.dataSource.data = data
-      }
+        this.estaCargando = false
+      },error:(err)=> {
+        console.log(err)
+        if(err.status == 404)
+        this.snackBar.open("Datos no encontrados", ":(",{duration:3000})
+        else
+        this.snackBar.open("Valio pepino", ":(",{duration:3000})
+        this.estaCargando = false
+      },
     })
   }
 
@@ -55,8 +66,10 @@ export class DetallesDelPeriodoComponent {
       width: "60%",
       data: gasto
     }).afterClosed().subscribe({
-      next: () => {
-        this.obtenerDetallesDelPeriodo()
+      next: (resultado) => {
+        if(resultado){
+          this.obtenerDetallesDelPeriodo()
+        }
       }
     })
   }
@@ -72,4 +85,5 @@ export class DetallesDelPeriodoComponent {
       }
     })
   }
+
 }

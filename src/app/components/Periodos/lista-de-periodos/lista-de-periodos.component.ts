@@ -5,6 +5,7 @@ import { Periodo } from 'src/app/interfaces/periodo';
 import { RepositorioService } from 'src/app/servicios/repositorio.service';
 import { FormularioDePeriodoComponent } from '../formulario-de-periodo/formulario-de-periodo.component';
 import { BorrarPeriodoComponent } from '../borrar-periodo/borrar-periodo.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lista-de-periodos',
@@ -14,19 +15,26 @@ import { BorrarPeriodoComponent } from '../borrar-periodo/borrar-periodo.compone
 export class ListaDePeriodosComponent {
   displayedColumns: string[] = ['nombre', 'fechaInicial', 'fechaFinal','acciones'];
   dataSource = new MatTableDataSource<Periodo>()
+  estaCargando=  false
    
   constructor(
     private dialog: MatDialog,
-    private sevicio: RepositorioService
+    private sevicio: RepositorioService,
+    private snackbar: MatSnackBar
   ) {
     this.obtenerPeridos()
   }
 
   obtenerPeridos() {
+    this.estaCargando = true
     this.sevicio.periodo.obtenerTodos().subscribe({
       next: (data) => {
         this.dataSource.data = data
-      }
+        this.estaCargando = false
+      },error:(err) =>{
+        console.log(err)
+        this.snackbar.open(JSON.stringify(err), ":(")
+      },
     })
   }
 

@@ -15,7 +15,7 @@ export class ListaDeApartadosComponent implements AfterViewInit {
   displayedColumns: string[] = ['subcategoriaNombre', 'nombre', 'acciones'];
   dataSource = new MatTableDataSource<ApartadoDto>();
   @ViewChild(MatSort) sort!: MatSort;
-
+  estaCargando = false
   constructor(
     private servicio: RepositorioService,
     private dialog: MatDialog
@@ -29,6 +29,7 @@ export class ListaDeApartadosComponent implements AfterViewInit {
 
 
   obtenerTodos() {
+    this.estaCargando = true
     this.servicio.apartado.obtenerTodos().subscribe({
       next: (data) => {
         //console.log(data)
@@ -37,6 +38,7 @@ export class ListaDeApartadosComponent implements AfterViewInit {
           item.tipoDeApartadoNombre = item.tipoDeApartado.nombre
         })
         this.dataSource.data = data
+        this.estaCargando = false
       }
     })
   }

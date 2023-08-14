@@ -11,7 +11,9 @@ const routes: Routes = [
   { path: "periodos", component: ListaDePeriodosComponent },
   { path: "periodos/detalles/:id", component: DetallesDelPeriodoComponent },
   { path: "apartados", component: ListaDeApartadosComponent },
-  { path: "apartados/detalles/:id", component: DetallesDeApartadoComponent }
+  { path: "apartados/detalles/:id", component: DetallesDeApartadoComponent },
+
+  { path: '**', redirectTo:''}
 ];
 
 @NgModule({
