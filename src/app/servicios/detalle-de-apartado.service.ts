@@ -8,12 +8,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DetalleDeApartadoService {
-  
-  agregar(detalle:DetalleDeApartadoDtoIn):Observable<any>{
+
+  actualizar(id: number, detalle: DetalleDeApartadoDtoIn): Observable<any> {
+    return this.httpclient.put<any>(this.url + "/" + id, detalle)
+  }
+
+  agregar(detalle: DetalleDeApartadoDtoIn): Observable<any> {
     return this.httpclient.post<any>(this.url, detalle)
   }
 
   constructor(private httpclient: HttpClient) { }
 
-  private url= environment.urlBase + "DetalleDeApartados"
+  private url = environment.urlBase + "DetalleDeApartados"
 }

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Periodo, PeriodoDtoIn } from 'src/app/interfaces/periodo';
+import { PeriodoDto, PeriodoDtoIn } from 'src/app/interfaces/periodo';
 import { RepositorioService } from 'src/app/servicios/repositorio.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class BorrarPeriodoComponent implements OnInit {
     private dialog: MatDialogRef<BorrarPeriodoComponent>,
     private snackBar: MatSnackBar,
     private servicio: RepositorioService,
-    @Inject(MAT_DIALOG_DATA) private periodo: Periodo
+    @Inject(MAT_DIALOG_DATA) private periodo: PeriodoDto
   ) {
     this.formGroup = this.formBuilder.group({
       nombre: ["", Validators.required],

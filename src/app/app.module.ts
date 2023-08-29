@@ -36,9 +36,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
 import { MatSortModule } from '@angular/material/sort'
 import { MatGridListModule } from '@angular/material/grid-list'
-import {MatProgressBarModule} from '@angular/material/progress-bar'
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
-import {MatChipsModule} from '@angular/material/chips'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatChipsModule } from '@angular/material/chips'
+import { MatTabsModule } from '@angular/material/tabs';
+import { TablaDePeriodoComponent } from './components/Periodos/tabla-de-periodo/tabla-de-periodo.component';
+import { EditarCategoriaComponent } from './components/Subcategorias/editar-categoria/editar-categoria.component';
+import { AgregarCategoriaComponent } from './components/Subcategorias/agregar-categoria/agregar-categoria.component';
+import { TablaDeSubcategoriasComponent } from './components/Subcategorias/tabla-de-subcategorias/tabla-de-subcategorias.component'
 
 @NgModule({
   declarations: [
@@ -55,7 +60,8 @@ import {MatChipsModule} from '@angular/material/chips'
     FormularioDeApartadoComponent,
     DetallesDeApartadoComponent,
     BorrarApartadoComponent,
-    FormularioDeDetalleDeApartadoComponent
+    FormularioDeDetalleDeApartadoComponent,    
+    TablaDePeriodoComponent, EditarCategoriaComponent, AgregarCategoriaComponent, TablaDeSubcategoriasComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +85,8 @@ import {MatChipsModule} from '@angular/material/chips'
     MatGridListModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

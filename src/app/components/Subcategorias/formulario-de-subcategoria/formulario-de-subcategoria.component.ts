@@ -1,7 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Guid } from 'src/app/helpers/Guid';
 import { Categoria } from 'src/app/interfaces/categoria';
 import { Subcategoria, SubcategoriaDtoIn } from 'src/app/interfaces/subcategoria';
@@ -15,33 +13,30 @@ import { RepositorioService } from 'src/app/servicios/repositorio.service';
 export class FormularioDeSubcategoriaComponent implements OnInit {
   categorias: Categoria[] = []
   public formGroup: FormGroup
-  subtitulo: string = "Agregar"
+  //@Input() subcategoria!: Subcategoria
+  @Output() eventEmitter: EventEmitter<SubcategoriaDtoIn> = new EventEmitter<SubcategoriaDtoIn>()
 
   constructor(
-    private dialogRef: MatDialogRef<FormularioDeSubcategoriaComponent>,
     private repositorio: RepositorioService,
-    private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public subcategoria: Subcategoria
+    private formBuilder: FormBuilder
   ) {
-    this.obtenerCategorias()
     this.formGroup = this.formBuilder.group({
       nombre: ["", Validators.required],
-      categoriaId: ["", Validators.required],
+      categoriaId: ['', [Validators.required, Validators.max(3), Validators.min(1)]],
       cantidad: ["", Validators.required]
     })
   }
 
   ngOnInit(): void {
-    console.log(this.subcategoria)
-    if (this.subcategoria) {
-      this.formGroup.patchValue({
-        nombre: this.subcategoria.nombre,
-        categoriaId: this.subcategoria.categoria.id,
-        cantidad: this.subcategoria.cantidad
-      })
-      this.subtitulo = "Actualizar"
-    }
+    this.obtenerCategorias()
+    // console.log(this.subcategoria)
+    // if (this.subcategoria) {
+    //   this.formGroup.patchValue({
+    //     nombre: this.subcategoria.nombre,
+    //     categoriaId: this.subcategoria.categoria.id,
+    //     cantidad: this.subcategoria.cantidad
+    //   })
+    // }
   }
 
   obtenerCategorias() {
@@ -54,42 +49,14 @@ export class FormularioDeSubcategoriaComponent implements OnInit {
   }
 
   guardarSubcategoria() {
-    if (this.subcategoria) {
+    if (this.formGroup.valid) {
       const subcategoria: SubcategoriaDtoIn = {
         cantidad: this.formGroup.value.cantidad,
         categoriaId: this.formGroup.value.categoriaId,
+        guid: Guid.newGuid(),
         nombre: this.formGroup.value.nombre,
-        guid: ""
       }
-      this.repositorio.subcategoria.actualizar(this.subcategoria.id, subcategoria).subscribe({
-        next: (data) => {
-          console.log(data)
-          this.snackBar.open("Datos registrados", "Ok", { duration: 3000 })
-        }
-        , error: (data) => {
-          console.log(data)
-          this.snackBar.open("Valio pepino. ", ":(", { duration: 3000 })
-        }
-      })      
-    } else {
-      const subcategoria: SubcategoriaDtoIn = {
-        cantidad: this.formGroup.value.cantidad,
-        categoriaId: this.formGroup.value.categoriaId,
-        nombre: this.formGroup.value.nombre,
-        guid: Guid.newGuid()
-      }
-      console.log(subcategoria)
-      this.repositorio.subcategoria.agregar(subcategoria).subscribe({
-        next: (data) => {
-          //console.log(data)
-          this.snackBar.open("Datos registrados", "Ok", { duration: 3000 })
-        }
-        , error: (data) => {
-          console.log(data)
-          this.snackBar.open("Valio pepino. ", ":(", { duration: 3000 })
-        }
-      })
+      this.eventEmitter.emit(subcategoria)
     }
-    this.dialogRef.close()
   }
 }

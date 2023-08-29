@@ -15,75 +15,58 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DetallesDelPeriodoComponent {
 
   displayedColumns: string[] = ['subcategoriaNombre', 'nombre', 'cantidad']
-  dataSource = new MatTableDataSource<GastoDto>()
+  gastosEntrada: GastoDto[] = []
+  gastos: GastoDto[] = []
+  gastosApartado: GastoDto[] = []
   estaCargando = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private servicio: RepositorioService,
-    private dialog: MatDialog,
+    private servicio: RepositorioService,    
     private snackBar: MatSnackBar
   ) {
     this.obtenerDetallesDelPeriodo()
   }
-  
+
   obtenerDetallesDelPeriodo() {
     this.estaCargando = true
     var id = Number(this.activatedRoute.snapshot.paramMap.get('id'))
     this.servicio.gasto.ObtenerTodosPorPeriodo(id).subscribe({
       next: (data) => {
         //console.log(data)
-        this.dataSource.data = data
+        this.gastosEntrada = this.obtenerPorCategoriaId(data,1)
+        this.gastos = this.obtenerPorCategoriaId(data,2)
+        this.gastosApartado = this.obtenerPorCategoriaId(data,3)
         this.estaCargando = false
-      },error:(err)=> {
+      }, error: (err) => {
         console.log(err)
-        if(err.status == 404)
-        this.snackBar.open("Datos no encontrados", ":(",{duration:3000})
+        if (err.status == 404)
+          this.snackBar.open("Datos no encontrados", ":(", { duration: 3000 })
         else
-        this.snackBar.open("Valio pepino", ":(",{duration:3000})
+          this.snackBar.open("Valio pepino", ":(", { duration: 3000 })
         this.estaCargando = false
       },
     })
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  obtenerPorCategoriaId(gastos: GastoDto[], categoriaId: number): GastoDto[] {
+    var entradas: GastoDto[] = []    
+
+    gastos.forEach(gasto => {
+      if (gasto.subcategoria.categoria.id == categoriaId)
+        entradas.push(gasto)
+    })
+
+    return entradas
+  } 
 
   obtenerTotal() {
     var total = 0
-    for (let index = 0; index < this.dataSource.data.length; index++) {
-      total += this.dataSource.data[index].cantidad
+    for (let index = 0; index < this.gastos.length; index++) {
+      total += this.gastos[index].cantidad
     }
 
     return total
-  }
-
-  agregarGasto(gasto: GastoDto) {
-    this.dialog.open(FormularioDeGastoComponent, {
-      disableClose: true,
-      width: "60%",
-      data: gasto
-    }).afterClosed().subscribe({
-      next: (resultado) => {
-        if(resultado){
-          this.obtenerDetallesDelPeriodo()
-        }
-      }
-    })
-  }
-
-  editarGasto(gasto: GastoDto) {
-    this.dialog.open(FormularioDeGastoComponent, {
-      disableClose: true,
-      width: "60%",
-      data: gasto
-    }).afterClosed().subscribe({
-      next: () => {
-        this.obtenerDetallesDelPeriodo()
-      }
-    })
   }
 
 }

@@ -1,6 +1,6 @@
 import { GastoDto } from "./gasto"
 
-export interface Periodo {
+export interface PeriodoDto {
     id:number
     guid: string
     nombre: string
