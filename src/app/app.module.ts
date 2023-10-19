@@ -40,10 +40,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatChipsModule } from '@angular/material/chips'
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox'
+
 import { TablaDePeriodoComponent } from './components/Periodos/tabla-de-periodo/tabla-de-periodo.component';
 import { EditarCategoriaComponent } from './components/Subcategorias/editar-categoria/editar-categoria.component';
 import { AgregarCategoriaComponent } from './components/Subcategorias/agregar-categoria/agregar-categoria.component';
-import { TablaDeSubcategoriasComponent } from './components/Subcategorias/tabla-de-subcategorias/tabla-de-subcategorias.component'
+import { TablaDeSubcategoriasComponent } from './components/Subcategorias/tabla-de-subcategorias/tabla-de-subcategorias.component';
+import { ListaDeVersionesComponent } from './components/Presupuesto/lista-de-versiones/lista-de-versiones.component';
+import { ListaDePresupuestosComponent } from './components/Presupuesto/lista-de-presupuestos/lista-de-presupuestos.component'
+
 
 @NgModule({
   declarations: [
@@ -60,8 +65,8 @@ import { TablaDeSubcategoriasComponent } from './components/Subcategorias/tabla-
     FormularioDeApartadoComponent,
     DetallesDeApartadoComponent,
     BorrarApartadoComponent,
-    FormularioDeDetalleDeApartadoComponent,    
-    TablaDePeriodoComponent, EditarCategoriaComponent, AgregarCategoriaComponent, TablaDeSubcategoriasComponent
+    FormularioDeDetalleDeApartadoComponent,
+    TablaDePeriodoComponent, EditarCategoriaComponent, AgregarCategoriaComponent, TablaDeSubcategoriasComponent, ListaDeVersionesComponent, ListaDePresupuestosComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +91,8 @@ import { TablaDeSubcategoriasComponent } from './components/Subcategorias/tabla-
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatChipsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

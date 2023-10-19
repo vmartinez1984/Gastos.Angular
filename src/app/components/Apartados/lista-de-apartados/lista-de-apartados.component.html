@@ -11,67 +11,52 @@
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Camineta" #input>
       </mat-form-field>
-      
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
 
-          <!-- Subcategoria Column -->
-          <ng-container matColumnDef="subcategoriaNombre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Subcategoria </th>
-            <td mat-cell *matCellDef="let row"> {{row.subcategoriaNombre}}
-            </td>
-          </ng-container>
-          
-          <!-- Apartado Column -->
-          <ng-container matColumnDef="apartado">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apartado </th>
-            <td mat-cell *matCellDef="let row">            
-              {{row.tipoDeApartadoNombre}}              
-            </td>
-          </ng-container>
-          
-          <!-- Nombre Column -->
-          <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
-            </th>
-            <td mat-cell *matCellDef="let row"> {{row.nombre}}            
-              <p color="primary" style="font-size: small;">-{{row.tipoDeApartadoNombre}}</p>
-              <p>Inicial {{row.cantidadInicial | currency}}</p>
-              <p>Final {{row.cantidadFinal | currency}}</p>
-            </td>
-          </ng-container>
-          
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef> 
-              <button mat-icon-button color="primary" (click)="agregar()">
-            <mat-icon>plus_one</mat-icon>
-          </button>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="accent" (click)="editar(element)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="primary" [routerLink]="['/apartados/detalles', element.id]">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="borrar(element)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      
-      <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4" *ngIf="estaCargando">Cargando</td>
-        <td class="mat-cell" colspan="4" *ngIf="!estaCargando">No se encontrado datos: "{{input.value}}"</td>
-      </tr>
-    </table>
-    
-    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
-  </div>
-</mat-card-content>
-</mat-card>
+      <div class="row">
+        <div class="col-md-4 mt-1 mb-1" *ngFor="let apartado of apartados">
+          <div class="card">
+            <div class="card-header">
+              {{apartado.nombre}}
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 text-primary">Fecha inicial</div>
+                <div class="col-md-6">{{apartado.fechaInicial | date}}</div>
+
+                <div class="col-md-6 text-primary">Cantidad inicial</div>
+                <div class="col-md-6">{{apartado.cantidadInicial | currency}}</div>
+
+                <div class="col-md-6 text-primary">Fecha final</div>
+                <div class="col-md-6">{{apartado.fechaFinal | date}}</div>
+
+                <div class="col-md-6 text-primary">Cantidad final</div>
+                <div class="col-md-6">{{apartado.cantidadFinal | currency}}</div>
+
+
+                <div class="col-md-6 text-primary">Dias restantes</div>
+                <div class="col-md-6">{{apartado.diasRestantes}}</div>
+
+                <div class="col-md-6 text-primary">Cantidad Meta</div>
+                <div class="col-md-6">{{apartado.cantidadMeta | currency}}</div>
+
+                <div class="col-md-6 text-primary">Tipo de apartado</div>
+                <div class="col-md-6">{{apartado.tipoDeApartadoNombre}}</div>
+
+                <div class="col-md-6 text-primary">Tipo de apartado</div>
+                <div class="col-md-6">{{obtenerTotal(apartado) | currency}}</div>
+
+                <div class="col-md-6 text-primary">Cantidad</div>
+                <div class="col-md-6">{{apartado.subcategoria.cantidad | currency}}</div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-warning btn-small text-white">
+                Editar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

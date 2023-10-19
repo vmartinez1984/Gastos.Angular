@@ -1,0 +1,36 @@
+<div *ngIf="presupuestos.length != 0">
+    <div class="container">
+        <mat-card>
+            <mat-card-content>
+
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <th>Subcategoria</th>
+                            <th>Cantidad</th>
+                            <th>Cantidad meta</th>
+                            <th>
+                                <button mat-button color="primary">
+                                    Agregar
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let presupuesto of presupuestos">
+                            <td>{{presupuesto.subcategoriaId}}</td>
+                            <td>{{presupuesto.cantidad | currency}}</td>
+                            <td>{{presupuesto.cantidadMeta | currency}}</td>
+                            <td>
+                                <button mat-button color="secondary" (click)="editar(presupuesto.id)">
+                                    editar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

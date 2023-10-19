@@ -24,7 +24,7 @@ export class TablaDeSubcategoriasComponent implements OnChanges {
   ) { }
 
   ngOnChanges(): void {
-    console.log(this.subcategoriasInput)
+    //console.log(this.subcategoriasInput)
     this.dataSource.data = this.subcategoriasInput
     this.obtenerTotal()
   }

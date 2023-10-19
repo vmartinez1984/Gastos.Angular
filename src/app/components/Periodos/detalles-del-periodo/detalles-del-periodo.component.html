@@ -17,6 +17,12 @@
                 <mat-tab label="Entrada">
                     <app-tabla-de-periodo [gastosInput]="gastosEntrada" />
                 </mat-tab>
+                <mat-tab label="No pagados">
+                    <app-tabla-de-periodo [gastosInput]="gastosNoPagados" />
+                </mat-tab>
+                <mat-tab label="Todos">
+                    <app-tabla-de-periodo [gastosInput]="gastosTodos" />
+                </mat-tab>
             </mat-tab-group>
         </mat-card-content>
     </mat-card>

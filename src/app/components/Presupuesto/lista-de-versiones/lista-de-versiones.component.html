@@ -1,0 +1,23 @@
+<div class="container">
+
+    <mat-card>
+        <mat-card-content>
+
+            <table width="100%">
+                <tr *ngFor="let version of versiones">
+                    <td>{{version.nombre}}</td>
+                    <td>{{version.fechaInicial | date}}</td>
+                    <td>{{version.fechaFinal | date}}</td>
+                    <td>
+                        <button mat-button color="primary" (click)="verDetalles(version.id)">
+                            Ver detalles
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+<app-lista-de-presupuestos [presupuestos]="presupuestos"/>

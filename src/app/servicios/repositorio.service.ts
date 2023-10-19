@@ -7,6 +7,8 @@ import { GastoService } from './gasto.service';
 import { ApartadoService } from './apartado.service';
 import { TipoDeApartadoService } from './tipo-de-apartado.service';
 import { DetalleDeApartadoService } from './detalle-de-apartado.service';
+import { VersionDePresupuestoService } from './version-de-presupuesto.service';
+import { PresupuestoService } from './presupuesto.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +29,19 @@ export class RepositorioService {
 
   public detalleDeApartado: DetalleDeApartadoService
 
-  constructor(httpClient: HttpClient) { 
+  public versionDePresupuesto: VersionDePresupuestoService
+
+  public presupuesto: PresupuestoService
+
+  constructor(httpClient: HttpClient) {
     this.subcategoria = new SubcategoriaService(httpClient)
     this.categoria = new CategoriaService(httpClient)
     this.periodo = new PeriodoService(httpClient)
     this.gasto = new GastoService(httpClient)
     this.apartado = new ApartadoService(httpClient)
     this.tipoDeApartado = new TipoDeApartadoService(httpClient)
-    this.detalleDeApartado= new DetalleDeApartadoService(httpClient)
+    this.detalleDeApartado = new DetalleDeApartadoService(httpClient)
+    this.versionDePresupuesto = new VersionDePresupuestoService(httpClient)
+    this.presupuesto = new PresupuestoService(httpClient)
   }
 }

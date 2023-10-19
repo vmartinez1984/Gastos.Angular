@@ -7,6 +7,7 @@ export interface ApartadoDto {
     intereses: number
     cantidadInicial: number
     cantidadFinal: number
+    cantidadMeta: number
     fechaInicial: Date
     fechaFinal: Date
     id: number

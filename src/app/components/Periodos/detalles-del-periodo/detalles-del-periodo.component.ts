@@ -15,14 +15,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DetallesDelPeriodoComponent {
 
   displayedColumns: string[] = ['subcategoriaNombre', 'nombre', 'cantidad']
-  gastosEntrada: GastoDto[] = []
   gastos: GastoDto[] = []
+  gastosEntrada: GastoDto[] = []
+  gastosNoPagados: GastoDto[] = []
   gastosApartado: GastoDto[] = []
+  gastosTodos: GastoDto[] = []
   estaCargando = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private servicio: RepositorioService,    
+    private servicio: RepositorioService,
     private snackBar: MatSnackBar
   ) {
     this.obtenerDetallesDelPeriodo()
@@ -34,9 +36,12 @@ export class DetallesDelPeriodoComponent {
     this.servicio.gasto.ObtenerTodosPorPeriodo(id).subscribe({
       next: (data) => {
         //console.log(data)
-        this.gastosEntrada = this.obtenerPorCategoriaId(data,1)
-        this.gastos = this.obtenerPorCategoriaId(data,2)
-        this.gastosApartado = this.obtenerPorCategoriaId(data,3)
+        this.gastosEntrada = this.obtenerPorCategoriaId(data, 1)
+        this.gastos = this.obtenerPorCategoriaId(data, 2)
+        this.gastosApartado = this.obtenerPorCategoriaId(data, 3)
+        this.gastosNoPagados = this.obtenerGastosNoPagados(data)
+        //console.log("Gastos no pagados", this.gastosNoPagados)
+        this.gastosTodos = data
         this.estaCargando = false
       }, error: (err) => {
         console.log(err)
@@ -49,8 +54,17 @@ export class DetallesDelPeriodoComponent {
     })
   }
 
+  obtenerGastosNoPagados(data: GastoDto[]): GastoDto[] {
+    var lista: GastoDto[]=[]
+    data.forEach(gasto => {
+          if (gasto.cantidad == 0)
+            lista.push(gasto)
+        });
+    return lista;
+  }
+
   obtenerPorCategoriaId(gastos: GastoDto[], categoriaId: number): GastoDto[] {
-    var entradas: GastoDto[] = []    
+    var entradas: GastoDto[] = []
 
     gastos.forEach(gasto => {
       if (gasto.subcategoria.categoria.id == categoriaId)
@@ -58,7 +72,7 @@ export class DetallesDelPeriodoComponent {
     })
 
     return entradas
-  } 
+  }
 
   obtenerTotal() {
     var total = 0

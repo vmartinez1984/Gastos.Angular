@@ -5,6 +5,7 @@ import { ApartadoDto } from 'src/app/interfaces/apartado';
 import { RepositorioService } from 'src/app/servicios/repositorio.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormularioDeApartadoComponent } from '../formulario-de-apartado/formulario-de-apartado.component';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-de-apartados',
@@ -14,6 +15,8 @@ import { FormularioDeApartadoComponent } from '../formulario-de-apartado/formula
 export class ListaDeApartadosComponent implements AfterViewInit {
   displayedColumns: string[] = ['subcategoriaNombre', 'nombre', 'acciones'];
   dataSource = new MatTableDataSource<ApartadoDto>();
+  apartados: ApartadoDto[] = []  
+
   @ViewChild(MatSort) sort!: MatSort;
   estaCargando = false
   constructor(
@@ -32,7 +35,8 @@ export class ListaDeApartadosComponent implements AfterViewInit {
     this.estaCargando = true
     this.servicio.apartado.obtenerTodos().subscribe({
       next: (data) => {
-        //console.log(data)
+        console.log(data)
+        this.apartados = data;
         data.forEach(item => {
           item.subcategoriaNombre = item.subcategoria.nombre
           item.tipoDeApartadoNombre = item.tipoDeApartado.nombre
@@ -84,4 +88,7 @@ export class ListaDeApartadosComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  obtenerTotal(apartado: ApartadoDto): number{
+    return apartado.listaDeDetalles.map(item=> item.cantidad).reduce((a: number,b: number)=>  a + b, 0)
+  }
 }

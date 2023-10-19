@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     //urlBase: "https://localhost:7142/api/"
     urlBase: "https://localhost:44360/api/"
-    //urlBase: "https://vmartinez84.xyz/api/"
+    //urlBase: "https://gastos-api.vmartinez84.xyz/api/"
   };
   
   /*
